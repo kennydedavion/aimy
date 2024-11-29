@@ -1,0 +1,5 @@
+<launch>
+    <node name="usb_camera_node" pkg="aimy" type="usb_camera_node.py" output="screen" />
+    <node name="picamera_node" pkg="aimy" type="picamera_node.py" output="screen" />
+</launch>
+

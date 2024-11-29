@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  
+  <include file="$(find usb_cam)/launch/usb_cam-test.launch" />
+  
+  <node pkg="rqt_image_view" type="rqt_image_view" name="image_view" output="screen" args="/usb_cam/image_raw" />
+  
+  <include file="$(find raspicam_node)/launch/camerav1_1280x720.launch" />  
+  
+  <node pkg="rosservice" type="rosservice" name="rosservice" args = "call --wait /raspicam_node/start_capture" />
+ 
+  <node pkg="mpu6050_serial_to_imu" type="mpu6050_serial_to_imu_node" name="mpu6050_serial_to_imu_node" required="true">
+    <param name="port" value="/dev/ttyUSB0"/>
+  </node>
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find mpu6050_serial_to_imu)/rviz/demo.rviz" required="true"/>
+
+   
+</launch>
